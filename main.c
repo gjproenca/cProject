@@ -13,7 +13,6 @@ int main()
 
         system("clear");
 
-        puts("Menu\n");
         puts("1 - Inserir Praia");
         puts("2 - Inserir Localidade");
         puts("3 - Listar Praias");

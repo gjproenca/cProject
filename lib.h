@@ -42,7 +42,6 @@ int strcmpCase(char *str1,char *str2)
     return strcmp(s1,s2);
 }
 
-//ver se substrings sao iguais
 int substrCase(char *str1,char *str2)
 {
     int i;
@@ -466,6 +465,7 @@ void ListarPraiasOption()
 {
     FILE *ficheiro;
     Praia temp;
+    int cont=0;
     ficheiro = fopen("./dados/Praias.dat","r");
 
     if(ficheiro==NULL)
@@ -478,12 +478,12 @@ void ListarPraiasOption()
 
     while (fread(&temp,sizeof(Praia),1,ficheiro)==1)
     {
-        putchar('\n');
-        printf("ID Praia: %d\n",temp.IDPraia);
+        cont==0?cont=1:putchar('\n');
         printf("Nome: %s\n",temp.Nome);
         printf("Tipo: %s\n",temp.Tipo);
         printf("Localidade: %s\n",temp.Localidade);
         printf("ID Localidade: %d\n",temp.IDLocalidade);
+        printf("ID Praia: %d\n",temp.IDPraia);
     }
 
     fclose(ficheiro);
@@ -496,6 +496,7 @@ void ListarPraias()
     FILE *ficheiro;
     Praia temp;
     char option='N';
+    int cont=0;
     ficheiro = fopen("./dados/Praias.dat","r");
 
     if(ficheiro==NULL)
@@ -530,12 +531,12 @@ void ListarPraias()
     {
         while (fread(&temp,sizeof(Praia),1,ficheiro)==1)
         {
-            putchar('\n');
-            printf("ID Praia: %d\n",temp.IDPraia);
+            cont==0?cont=1:putchar('\n');
             printf("Nome: %s\n",temp.Nome);
             printf("Tipo: %s\n",temp.Tipo);
             printf("Localidade: %s\n",temp.Localidade);
             printf("ID Localidade: %d\n",temp.IDLocalidade);
+            printf("ID Praia: %d\n",temp.IDPraia);
         }
     }
 
@@ -551,6 +552,7 @@ void ListarLocalidadesOption()
 {
     FILE *ficheiro;
     Localidade temp;
+    int cont=0;
     ficheiro = fopen("./dados/Localidades.dat","r");
 
     if(ficheiro==NULL)
@@ -563,7 +565,7 @@ void ListarLocalidadesOption()
 
     while (fread(&temp,sizeof(Localidade),1,ficheiro)==1)
     {
-        putchar('\n');
+        cont==0?cont=1:putchar('\n');
         printf("ID Localidade: %d\n",temp.IDLocalidade);
         printf("Nome: %s\n",temp.Nome);
     }
@@ -578,6 +580,7 @@ void ListarLocalidades()
     FILE *ficheiro;
     Localidade temp;
     char option='N';
+    int cont=0;
     ficheiro = fopen("./dados/Localidades.dat","r");
 
     if(ficheiro==NULL)
@@ -612,7 +615,7 @@ void ListarLocalidades()
     {
         while (fread(&temp,sizeof(Localidade),1,ficheiro)==1)
         {
-            putchar('\n');
+            cont==0?cont=1:putchar('\n');
             printf("ID Localidade: %d\n",temp.IDLocalidade);
             printf("Nome: %s\n",temp.Nome);
         }
