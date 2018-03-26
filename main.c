@@ -4,7 +4,6 @@ int main()
 {
     int option;
 
-
     do
     {
         InicializarFicheiros();
