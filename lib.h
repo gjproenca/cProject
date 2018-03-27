@@ -76,6 +76,20 @@ void firstLetterUpper(char *ipt)
     }
 }
 
+void Pause()
+{
+    char enter;
+    do
+    {
+        enter='\0';
+        printf("\nTecla Enter para continuar...");
+        scanf("%c",&enter);
+        if(enter!='\n')clrm();
+    }
+    while(enter!='\n');
+    return;
+}
+
 void LimparFicheiros()
 {
     FILE *ficheiro;
@@ -133,8 +147,9 @@ void LimparFicheiros()
     ficheiro = fopen("./export/Localidades.txt","w");
     fclose(ficheiro);
 
-    printf("\nFicheiro(s) inicializado(s) com sucesso!\n\nEnter para continuar...");
-    getchar();
+    puts("\nFicheiro(s) inicializado(s) com sucesso!");
+
+    Pause();
 
     return;
 }
@@ -559,8 +574,7 @@ void ListarPraias()
 
     fclose(ficheiro);
 
-    printf("\nPressione Enter para continuar...");
-    getchar();
+    Pause();
 
     return;
 }
@@ -647,8 +661,7 @@ void ListarLocalidades()
     }
     fclose(ficheiro);
 
-    printf("\nPressione Enter para continuar...");
-    getchar();
+    Pause();
 
     return;
 }
@@ -766,8 +779,7 @@ void ListarPraiasLocalidade()
 
     fclose(ficheiro);
 
-    printf("\nPressione Enter para continuar...");
-    getchar();
+    Pause();
 
     return;
 }
@@ -894,8 +906,7 @@ void ProcurarPraia()
 
     fclose(ficheiro);
 
-    printf("\nPressione Enter para continuar...");
-    getchar();
+    Pause();
 
     return;
 }
@@ -1137,8 +1148,7 @@ void AlterarPraia()
 
     fclose(ficheiro);
 
-    printf("\nPressione Enter para continuar...");
-    getchar();
+    Pause();
 
     return;
 }
@@ -1198,8 +1208,8 @@ void ExportarFicheirosCsv()
     //system("soffice --calc ./export/Praias.csv"); //fix this not opening corectly
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
-    puts("\nEnter para continuar...");
-    getchar();
+
+    Pause();
 
     fclose(ficheiroPraias);
     fclose(ficheiroCsvPraias);
@@ -1259,8 +1269,8 @@ void ExportarFicheirosTxt()
     }
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
-    puts("\nEnter para continuar...");
-    getchar();
+
+    Pause();
 
     fclose(ficheiroPraias);
     fclose(ficheiroCsvPraias);
