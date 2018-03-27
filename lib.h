@@ -82,7 +82,7 @@ void Pause()
     do
     {
         enter='\0';
-        printf("\nTecla Enter para continuar...");
+        printf("\e[32m\nTecla Enter para continuar...\e[37m");
         scanf("%c",&enter);
         if(enter!='\n')clrm();
     }
@@ -147,7 +147,7 @@ void LimparFicheiros()
     ficheiro = fopen("./export/Localidades.txt","w");
     fclose(ficheiro);
 
-    puts("\nFicheiro(s) inicializado(s) com sucesso!");
+    puts("\e[32m\nFicheiro(s) limpo(s) com sucesso!\e[37m");
 
     Pause();
 
@@ -532,7 +532,7 @@ void ListarPraias()
 
     if(!VerificarEsxistenciaDados(ficheiro))
     {
-        printf("Ficheiro sem registos!\n");
+        printf("\e[31mFicheiro sem registos!\e[37m\n");
 
         do
         {
@@ -624,7 +624,7 @@ void ListarLocalidades()
 
     if(!VerificarEsxistenciaDados(ficheiro))
     {
-        printf("Ficheiro sem registos!\n");
+        printf("\e[31mFicheiro sem registos!\e[37m\n");
 
         do
         {
@@ -727,7 +727,7 @@ void ListarPraiasLocalidade()
 
     if(!VerificarEsxistenciaDados(ficheiro))
     {
-        printf("Ficheiro sem registos!\n");
+        printf("\e[31mFicheiro sem registos!\e[37m\n");
 
         do
         {
@@ -850,7 +850,7 @@ void ProcurarPraia()
 
     if(!VerificarEsxistenciaDados(ficheiro))
     {
-        printf("Ficheiro sem registos!\n");
+        printf("\e[31mFicheiro sem registos!\e[37m\n");
 
         do
         {
@@ -1028,12 +1028,12 @@ void AlterarPraia()
 
     if(!VerificarEsxistenciaDados(ficheiro))
     {
-        printf("Ficheiro sem registos!\n");
+        printf("\e[31mFicheiro sem registos!\e[37m\n");
 
         do
         {
             memset(option,'\0', sizeof(option));
-            printf("\nTem a certeza que quer alterar este registo(S/N)? ");
+            printf("\nQuer inserir um registo novo (S/N)? ");
             scanf("%s",option);
             clrm();
         }
@@ -1205,7 +1205,7 @@ void ExportarFicheirosCsv()
         fprintf(ficheiroCsvLocalidades,"%d;%s\n",tempIdLocalidadeLocalidade,tempNomeLocalidade);
     }
 
-    //system("soffice --calc ./export/Praias.csv"); //fix this not opening corectly
+    //system("soffice -o ./export/Localidades.csv"); //fix this not opening corectly
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
 

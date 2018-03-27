@@ -26,7 +26,7 @@ int main()
             puts("10 - Inicializar todos os ficheiros");
             puts("0 - Sair");
 
-            printf("\nOpção: ");
+            printf("\e[33;4m\nOpção:\e[37;0m ");
             scanf("%d",&option);
             clrm();
         }
