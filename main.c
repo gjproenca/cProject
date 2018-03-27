@@ -8,25 +8,29 @@ int main()
     {
         InicializarFicheiros();
 
-        option=-1;
+        do
+        {
+            option=-1;
 
-        system("clear");
+            system("clear");
 
-        puts("1 - Inserir Praia");
-        puts("2 - Inserir Localidade");
-        puts("3 - Listar Praias");
-        puts("4 - Listar Localidades");
-        puts("5 - Listar Praias por Localidade");
-        puts("6 - Procurar Praia");
-        puts("7 - Alterar Praia");
-        puts("8 - Exportar ficheiros para Csv");
-        puts("9 - Exportar ficheiros para Txt");
-        puts("10 - Inicializar todos os ficheiros");
-        puts("0 - Sair");
+            puts("1 - Inserir Praia");
+            puts("2 - Inserir Localidade");
+            puts("3 - Listar Praias");
+            puts("4 - Listar Localidades");
+            puts("5 - Listar Praias por Localidade");
+            puts("6 - Procurar Praia");
+            puts("7 - Alterar Praia");
+            puts("8 - Exportar ficheiros para Csv");
+            puts("9 - Exportar ficheiros para Txt");
+            puts("10 - Inicializar todos os ficheiros");
+            puts("0 - Sair");
 
-        printf("\nOpção: ");
-        scanf("%d",&option);
-        clrm();
+            printf("\nOpção: ");
+            scanf("%d",&option);
+            clrm();
+        }
+        while(option<0||option>10);
 
         switch(option)
         {

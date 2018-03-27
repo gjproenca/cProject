@@ -279,7 +279,7 @@ void InserirLocalidade()
 {
     FILE *ficheiro;
     Localidade temp;
-    char option='N';
+    char option[2];
     fpos_t posicao;
     ficheiro = fopen("./dados/Localidades.dat","a");
 
@@ -314,12 +314,16 @@ void InserirLocalidade()
             fwrite(&temp,sizeof(Localidade),1,ficheiro);
         }
 
-        printf("\nDeseja inserir um novo registo (S/N)? ");
-        option=getchar();
-
-        if(option!='\n')clrm();
+        do
+        {
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
+            clrm();
+        }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
     }
-    while(toupper(option)=='S');
+    while(toupper(option[0])=='S');
 
     fclose(ficheiro);
 
@@ -368,7 +372,7 @@ void InserirPraia()
     FILE *ficheiro;
     Praia temp;
     int tempIntTipo;
-    char option='N';
+    char option[2];
     fpos_t posicao;
     ficheiro = fopen("./dados/Praias.dat","a");
 
@@ -434,12 +438,16 @@ void InserirPraia()
             fwrite(&temp,sizeof(Praia),1,ficheiro);
         }
 
-        printf("\nDeseja inserir um novo registo (S/N)? ");
-        option=getchar();
-
-        if(option!='\n')clrm();
+        do
+        {
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
+            clrm();
+        }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
     }
-    while(toupper(option)=='S');
+    while(toupper(option[0])=='S');
 
     fclose(ficheiro);
 
@@ -495,7 +503,7 @@ void ListarPraias()
 {
     FILE *ficheiro;
     Praia temp;
-    char option='N';
+    char option[2];
     int cont=0;
     ficheiro = fopen("./dados/Praias.dat","r");
 
@@ -511,21 +519,30 @@ void ListarPraias()
     {
         printf("Ficheiro sem registos!\n");
 
-        printf("\nDeseja inserir um registo novo (S/N)? ");
-        scanf("%c",&option);
-        clrm();
-
-        if(toupper(option)=='S')InserirPraia();
-
-        if(toupper(option)=='S')
+        do
         {
-            option='N';
-            printf("\nAinda quer listar a(s) Praia(s) (S/N)? ");
-            scanf("%c",&option);
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
             clrm();
         }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-        if(toupper(option)=='S')ListarPraiasOption();
+        if(toupper(option[0])=='S')
+        {
+            InserirPraia();
+
+            do
+            {
+                memset(option,'\0', sizeof(option));
+                printf("\nAinda quer listar a(s) Praia(s) (S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
+        }
+
+        if(toupper(option[0])=='S')ListarPraiasOption();
     }
     else
     {
@@ -579,7 +596,7 @@ void ListarLocalidades()
 {
     FILE *ficheiro;
     Localidade temp;
-    char option='N';
+    char option[2];
     int cont=0;
     ficheiro = fopen("./dados/Localidades.dat","r");
 
@@ -595,21 +612,29 @@ void ListarLocalidades()
     {
         printf("Ficheiro sem registos!\n");
 
-        printf("\nDeseja inserir um registo novo (S/N)? ");
-        scanf("%c",&option);
-        clrm();
-
-        if(toupper(option)=='S')InserirLocalidade();
-
-        if(toupper(option)=='S')
+        do
         {
-            option='N';
-            printf("\nAinda quer listar a(s) Localidade(s) (S/N)? ");
-            scanf("%c",&option);
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
             clrm();
         }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-        if(toupper(option)=='S')ListarLocalidadesOption();
+        if(toupper(option[0])=='S')
+        {
+            InserirLocalidade();
+
+            do
+            {
+                memset(option,'\0', sizeof(option));
+                printf("\nAinda quer listar a(s) Localidade(s) (S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
+        }
+        if(toupper(option[0])=='S')ListarLocalidadesOption();
     }
     else
     {
@@ -620,7 +645,6 @@ void ListarLocalidades()
             printf("Nome: %s\n",temp.Nome);
         }
     }
-
     fclose(ficheiro);
 
     printf("\nPressione Enter para continuar...");
@@ -677,7 +701,7 @@ void ListarPraiasLocalidade()
     Praia temp;
     int tempInputID;
     int booleanID=0;
-    char option='N';
+    char option[2];
     ficheiro = fopen("./dados/Praias.dat","r");
 
     if(ficheiro==NULL)
@@ -692,21 +716,30 @@ void ListarPraiasLocalidade()
     {
         printf("Ficheiro sem registos!\n");
 
-        printf("\nDeseja inserir um registo novo (S/N)? ");
-        scanf("%c",&option);
-        clrm();
-
-        if(toupper(option)=='S')InserirPraia();
-
-        if(toupper(option)=='S')
+        do
         {
-            option='N';
-            printf("\nAinda quer listar a(s) Praias(s) por ID (S/N)? ");
-            scanf("%c",&option);
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
             clrm();
         }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-        if(toupper(option)=='S')ListarPraiasLocalidadeOption();
+        if(toupper(option[0])=='S')
+        {
+            InserirPraia();
+
+            do
+            {
+                memset(option,'\0', sizeof(option));
+                printf("\nAinda quer listar a(s) Praias(s) por ID (S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
+        }
+
+        if(toupper(option[0])=='S')ListarPraiasLocalidadeOption();
     }
     else
     {
@@ -757,6 +790,7 @@ void ProcurarPraiaOption()
 
     do
     {
+        memset(tempInputNome,'\0', sizeof(tempInputNome));
         printf("Insira o nome da Praia a procurar: ");
         scanf("%200[^\n]",tempInputNome);
         clrm();
@@ -788,7 +822,7 @@ void ProcurarPraia()
 {
     FILE *ficheiro;
     Praia temp;
-    char option='N';
+    char option[2];
     char tempInputNome[201];
     int booleanFound=0;
     ficheiro = fopen("./dados/Praias.dat","r");
@@ -806,26 +840,35 @@ void ProcurarPraia()
     {
         printf("Ficheiro sem registos!\n");
 
-        printf("\nDeseja inserir um registo novo (S/N)? ");
-        scanf("%c",&option);
-        clrm();
-
-        if(toupper(option)=='S')InserirPraia();
-
-        if(toupper(option)=='S')
+        do
         {
-            option='N';
-            printf("\nAinda quer listar a(s) Praias(s) por Nome (S/N)? ");
-            scanf("%c",&option);
+            memset(option,'\0', sizeof(option));
+            printf("\nDeseja inserir um novo registo (S/N)? ");
+            scanf("%s",option);
             clrm();
         }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-        if(toupper(option)=='S')ProcurarPraiaOption();
+        if(toupper(option[0])=='S')
+        {
+            InserirPraia();
+
+            do
+            {
+                memset(option,'\0', sizeof(option));
+                printf("\nAinda quer listar a(s) Praias(s) por Nome (S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
+        }
+        if(toupper(option[0])=='S')ProcurarPraiaOption();
     }
     else
     {
         do
         {
+            memset(tempInputNome,'\0', sizeof(tempInputNome));
             printf("Insira o nome da Praia a procurar: ");
             scanf("%200[^\n]",tempInputNome);
             clrm();
@@ -863,17 +906,15 @@ void AlterarPraiaOption()
     Praia temp;
     int IDPraia;
     int tempIntTipo;
-    char option='N';
+    char option[2];
     fpos_t posicao;
     ficheiro = fopen("./dados/Praias.dat","r+");
 
     system("clear");
 
-
     printf("Insira o ID da praia a alterar: ");
     scanf("%d",&IDPraia);
     clrm();
-
 
     fgetpos(ficheiro,&posicao);
 
@@ -888,11 +929,16 @@ void AlterarPraiaOption()
             printf("Localidade: %s\n",temp.Localidade);
             printf("ID Localidade: %d\n",temp.IDLocalidade);
 
-            printf("\nTem a certeza que quer alterar este registo(S/N)? ");
-            option=getchar();
-            clrm();
+            do
+            {
+                memset(option,'\0', sizeof(option));
+                printf("\nTem a certeza que quer alterar este registo(S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-            if(toupper(option)=='S')
+            if(toupper(option[0])=='S')
             {
                 do
                 {
@@ -960,7 +1006,7 @@ void AlterarPraia()
     Praia temp;
     int IDPraia;
     int tempIntTipo;
-    char option='N';
+    char option[2];
     int booleanFound=0;
     fpos_t posicao;
     ficheiro = fopen("./dados/Praias.dat","r+");
@@ -973,21 +1019,29 @@ void AlterarPraia()
     {
         printf("Ficheiro sem registos!\n");
 
-        printf("\nDeseja inserir um registo novo (S/N)? ");
-        scanf("%c",&option);
-        clrm();
-
-        if(toupper(option)=='S')InserirPraia();
-
-        if(toupper(option)=='S')
+        do
         {
-            option='N';
-            printf("\nAinda quer Alterar a(s) Praias(s) (S/N)? ");
-            scanf("%c",&option);
+            memset(option,'\0', sizeof(option));
+            printf("\nTem a certeza que quer alterar este registo(S/N)? ");
+            scanf("%s",option);
             clrm();
         }
+        while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-        if(toupper(option)=='S')AlterarPraiaOption();
+        if(toupper(option[0])=='S')
+        {
+            InserirPraia();
+
+            do
+            {
+                printf("\nAinda quer Alterar Praias(s) (S/N)? ");
+                scanf("%s",option);
+                clrm();
+            }
+            while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
+        }
+
+        if(toupper(option[0])=='S')AlterarPraiaOption();
     }
     else
     {
@@ -1006,11 +1060,16 @@ void AlterarPraia()
                 printf("ID Praia: %d\n",temp.IDPraia);
                 printf("ID Localidade: %d\n",temp.IDLocalidade);
 
-                printf("\nTem a certeza que quer alterar este registo(S/N)? ");
-                option=getchar();
-                clrm();
+                do
+                {
+                    memset(option,'\0', sizeof(option));
+                    printf("\nTem a certeza que quer alterar este registo(S/N)? ");
+                    scanf("%s",option);
+                    clrm();
+                }
+                while(toupper((option[0])!='S'||toupper(option[0])!='N')&&strlen(option)!=1);
 
-                if(toupper(option)=='S')
+                if(toupper(option[0])=='S')
                 {
                     do
                     {
@@ -1072,7 +1131,7 @@ void AlterarPraia()
             fgetpos(ficheiro,&posicao);
         }
 
-        if(!booleanFound && toupper(option)=='S')puts("\nNão existem registos com esta ID!");
+        if(!booleanFound && toupper(option[0])=='S')puts("\nNão existem registos com esta ID!");
 
     }
 
