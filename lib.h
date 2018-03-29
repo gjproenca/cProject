@@ -262,7 +262,7 @@ int VerificarExistenciaPraia(char *nomePraia, char *nomeLocalidade)
 
     while (fread(&tempPraia,sizeof(Praia),1,ficheiroPraia)==1)
     {
-        if(strcmpCase(tempPraia.Nome, nomePraia) == 0 && strcmpCase(tempPraia.Localidade, nomeLocalidade) == 0)
+        if(strcmpCase(tempPraia.Nome,nomePraia) == 0 && strcmpCase(tempPraia.Localidade,nomeLocalidade) == 0)
         {
             fclose(ficheiroPraia);
             return 1;
@@ -597,8 +597,8 @@ void ListarLocalidadesOption()
     while (fread(&temp,sizeof(Localidade),1,ficheiro)==1)
     {
         cont==0?cont=1:putchar('\n');
-        printf("ID Localidade: %d\n",temp.IDLocalidade);
         printf("Nome: %s\n",temp.Nome);
+        printf("ID Localidade: %d\n",temp.IDLocalidade);
     }
 
     fclose(ficheiro);
@@ -655,8 +655,8 @@ void ListarLocalidades()
         while (fread(&temp,sizeof(Localidade),1,ficheiro)==1)
         {
             cont==0?cont=1:putchar('\n');
-            printf("ID Localidade: %d\n",temp.IDLocalidade);
             printf("Nome: %s\n",temp.Nome);
+            printf("ID Localidade: %d\n",temp.IDLocalidade);
         }
     }
     fclose(ficheiro);
@@ -691,11 +691,11 @@ void ListarPraiasLocalidadeOption()
         if(tempInputID==temp.IDLocalidade)
         {
             putchar('\n');
-            printf("ID Praia: %d\n",temp.IDPraia);
             printf("Nome: %s\n",temp.Nome);
             printf("Tipo: %s\n",temp.Tipo);
             printf("Localidade: %s\n",temp.Localidade);
             printf("ID Localidade: %d\n",temp.IDLocalidade);
+            printf("ID Praia: %d\n",temp.IDPraia);
 
             booleanID=1;
         }
@@ -765,11 +765,11 @@ void ListarPraiasLocalidade()
             if(tempInputID==temp.IDLocalidade)
             {
                 putchar('\n');
-                printf("ID Praia: %d\n",temp.IDPraia);
                 printf("Nome: %s\n",temp.Nome);
                 printf("Tipo: %s\n",temp.Tipo);
                 printf("Localidade: %s\n",temp.Localidade);
                 printf("ID Localidade: %d\n",temp.IDLocalidade);
+                printf("ID Praia: %d\n",temp.IDPraia);
 
                 booleanID=1;
             }
@@ -814,11 +814,11 @@ void ProcurarPraiaOption()
         if(strcmpCase(tempInputNome,temp.Nome) == 0)
         {
             putchar('\n');
-            printf("ID Praia: %d\n",temp.IDPraia);
             printf("Nome: %s\n",temp.Nome);
             printf("Tipo: %s\n",temp.Tipo);
             printf("Localidade: %s\n",temp.Localidade);
             printf("ID Localidade: %d\n",temp.IDLocalidade);
+            printf("ID Praia: %d\n",temp.IDPraia);
             booleanFound=1;
         }
     }
@@ -892,11 +892,11 @@ void ProcurarPraia()
             if(strcmpCase(tempInputNome,temp.Nome) == 0)
             {
                 putchar('\n');
-                printf("ID Praia: %d\n",temp.IDPraia);
                 printf("Nome: %s\n",temp.Nome);
                 printf("Tipo: %s\n",temp.Tipo);
                 printf("Localidade: %s\n",temp.Localidade);
                 printf("ID Localidade: %d\n",temp.IDLocalidade);
+                printf("ID Praia: %d\n",temp.IDPraia);
                 booleanFound=1;
             }
         }
@@ -934,11 +934,11 @@ void AlterarPraiaOption()
         if(IDPraia==temp.IDPraia)
         {
             putchar('\n');
-            printf("ID Praia: %d\n",temp.IDPraia);
             printf("Nome: %s\n",temp.Nome);
             printf("Tipo: %s\n",temp.Tipo);
             printf("Localidade: %s\n",temp.Localidade);
             printf("ID Localidade: %d\n",temp.IDLocalidade);
+            printf("ID Praia: %d\n",temp.IDPraia);
 
             do
             {
@@ -1068,8 +1068,8 @@ void AlterarPraia()
                 printf("Nome: %s\n",temp.Nome);
                 printf("Tipo: %s\n",temp.Tipo);
                 printf("Localidade: %s\n",temp.Localidade);
-                printf("ID Praia: %d\n",temp.IDPraia);
                 printf("ID Localidade: %d\n",temp.IDLocalidade);
+                printf("ID Praia: %d\n",temp.IDPraia);
 
                 do
                 {
@@ -1182,8 +1182,8 @@ void ExportarFicheirosCsv()
     char tempLocalidadePraia[200];
     int tempIdLocalidadePraia;
 
-    fprintf(ficheiroCsvPraias,"ID Praia;Nome;Tipo;Localidade;ID Localidade\n");
-    fprintf(ficheiroCsvLocalidades,"ID Localidade;Nome\n");
+    fprintf(ficheiroCsvPraias,"Nome;Tipo;Localidade;ID Localidade;ID Praia\n");
+    fprintf(ficheiroCsvLocalidades,"Nome;ID Localidade\n");
 
     while (fread(&tempStructPraia,sizeof(Praia),1,ficheiroPraias)==1)
     {
@@ -1193,7 +1193,7 @@ void ExportarFicheirosCsv()
         strcpy(tempLocalidadePraia,tempStructPraia.Localidade);
         tempIdLocalidadePraia=tempStructPraia.IDLocalidade;
 
-        fprintf(ficheiroCsvPraias,"%d;%s;%s;%s;%d\n",tempIdPraia,tempNomePraia,tempTipoPraia,tempLocalidadePraia,tempIdLocalidadePraia);
+        fprintf(ficheiroCsvPraias,"%s;%s;%s;%d;%d\n",tempNomePraia,tempTipoPraia,tempLocalidadePraia,tempIdLocalidadePraia,tempIdPraia);
     }
 
     while (fread(&tempStructLocalidade,sizeof(Localidade),1,ficheiroLocalidades)==1)
@@ -1201,7 +1201,7 @@ void ExportarFicheirosCsv()
         tempIdLocalidadeLocalidade=tempStructLocalidade.IDLocalidade;
         strcpy(tempNomeLocalidade,tempStructLocalidade.Nome);
 
-        fprintf(ficheiroCsvLocalidades,"%d;%s\n",tempIdLocalidadeLocalidade,tempNomeLocalidade);
+        fprintf(ficheiroCsvLocalidades,"%s;%d\n",tempNomeLocalidade,tempIdLocalidadeLocalidade);
     }
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
@@ -1254,7 +1254,7 @@ void ExportarFicheirosTxt()
         strcpy(tempLocalidadePraia,tempStructPraia.Localidade);
         tempIdLocalidadePraia=tempStructPraia.IDLocalidade;
 
-        fprintf(ficheiroCsvPraias,"ID Praia: %d\nNome: %s\nTipo: %s\nLocalidade: %s\nID Localidade: %d\n\n",tempIdPraia,tempNomePraia,tempTipoPraia,tempLocalidadePraia,tempIdLocalidadePraia);
+        fprintf(ficheiroCsvPraias,"Nome: %s\nTipo: %s\nLocalidade: %s\nID Localidade: %d\nID Praia: %d\n\n",tempNomePraia,tempTipoPraia,tempLocalidadePraia,tempIdLocalidadePraia,tempIdPraia);
     }
 
     while (fread(&tempStructLocalidade,sizeof(Localidade),1,ficheiroLocalidades)==1)
@@ -1262,7 +1262,7 @@ void ExportarFicheirosTxt()
         tempIdLocalidadeLocalidade=tempStructLocalidade.IDLocalidade;
         strcpy(tempNomeLocalidade,tempStructLocalidade.Nome);
 
-        fprintf(ficheiroCsvLocalidades,"ID Localidade: %d\nNome: %s\n\n",tempIdLocalidadeLocalidade,tempNomeLocalidade);
+        fprintf(ficheiroCsvLocalidades,"Nome: %s\nID Localidade: %d\n\n",tempNomeLocalidade,tempIdLocalidadeLocalidade);
     }
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
