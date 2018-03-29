@@ -1143,7 +1143,6 @@ void AlterarPraia()
         }
 
         if(!booleanFound && toupper(option[0])=='S')puts("\nNão existem registos com esta ID!");
-
     }
 
     fclose(ficheiro);
@@ -1204,8 +1203,6 @@ void ExportarFicheirosCsv()
 
         fprintf(ficheiroCsvLocalidades,"%d;%s\n",tempIdLocalidadeLocalidade,tempNomeLocalidade);
     }
-
-    //system("soffice -o ./export/Localidades.csv"); //fix this not opening corectly
 
     puts("\nFicheiros exportados com sucesso para a pasta Export!");
 
